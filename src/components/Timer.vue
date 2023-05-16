@@ -1,49 +1,49 @@
 <template>
     <h1>{{ timerText }}</h1>
-    <h2>{{ remainingSeconds }}</h2 >
 </template>
 
 <script>
 export default {
     emits: ['countdown'],
     props: {
-        timer: Object   
+        timer: Object,
+        c: Object
     },
     computed: {
         timerText() {
-            return this.timer.name + ': ' + this.c;
+            return this.timer.name + ': ' + this.remainingSeconds;
         }
     },
     data () {
         return {
-            remainingSeconds: 0,
-            counting: false,
-            header: 'Timer:'
+            remainingSeconds: 10,
         };
     },
     watch: {
         remainingSeconds: {
             handler(value) {
+                console.log("value", value)
                 if (value > 0) {
                     setTimeout(() => {
                         this.remainingSeconds--;
                     }, 1000);
                 }
-            },
-            immediate: true // This ensures the watcher is triggered upon creation
+                else {
+                    this.onCountdownEnd();
+                }
+            },            
         }
     },
     mounted() {
-        this.remainingSeconds = this.timer.initialSeconds;
+        this.startCountdown();
     },
     methods: {
         startCountdown() {
-            this.counting = true;
             this.remainingSeconds = this.timer.initialSeconds;
         },
         onCountdownEnd() {
-            this.counting = false;
-            this.$emit('countdown', this.timer.name);
+            this.remainingSeconds = this.timer.initialSeconds;
+            this.$emit('countdown', this.timer);
         },
     }
 }
