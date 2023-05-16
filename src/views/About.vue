@@ -35,11 +35,11 @@ export default {
         return {
             counting: false,
             timers: [
-                {name: 'Boss1', initialSeconds: 5, sound: puftupAudio},
-                {name: 'Kish1', initialSeconds: 5, sound: pauseDkc2Audio},
-                {name: 'Boss2', initialSeconds: 5, sound: puftupAudio},
+                {name: 'Boss1', initialSeconds: 30, sound: puftupAudio},
+                {name: 'Kish1', initialSeconds: 30, sound: pauseDkc2Audio},
+                {name: 'Boss2', initialSeconds: 25, sound: puftupAudio},
                 {name: 'Loot', initialSeconds: 5, sound: animalTokensAudio},
-                {name: 'Kish2', initialSeconds: 5, sound: pauseDkc2Audio},
+                {name: 'Kish2', initialSeconds: 30, sound: pauseDkc2Audio},
             ],
             currentTimer: undefined
         };

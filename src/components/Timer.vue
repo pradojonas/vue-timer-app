@@ -7,7 +7,7 @@ export default {
     emits: ['countdown'],
     props: {
         timer: Object,
-        c: Object
+        currentTimer: Object
     },
     computed: {
         timerText() {
@@ -21,16 +21,13 @@ export default {
     },
     watch: {
         remainingSeconds: {
-            handler(value) {
-                console.log("value", value)
-                if (value > 0) {
-                    setTimeout(() => {
-                        this.remainingSeconds--;
-                    }, 1000);
-                }
-                else {
-                    this.onCountdownEnd();
-                }
+            handler: function(oldVal, newVal) {
+                this.decreaseTimer();
+            },            
+        },
+        currentTimer: {
+            handler: function(oldVal, newVal) {
+                this.decreaseTimer();
             },            
         }
     },
@@ -38,6 +35,19 @@ export default {
         this.startCountdown();
     },
     methods: {
+        decreaseTimer() {
+            console.log("remSeconds", this.remainingSeconds);
+            if (this.remainingSeconds > 0) {
+                setTimeout(() => {        
+                    if (this.currentTimer.name == this.timer.name) {
+                        this.remainingSeconds--;
+                    }
+                }, 1000);
+            }
+            else {
+                this.onCountdownEnd();
+            }
+        },
         startCountdown() {
             this.remainingSeconds = this.timer.initialSeconds;
         },
