@@ -41,11 +41,11 @@ export default {
             counting: false,
             checkedSummonsEnabled: true,
             timers: [
-                {name: 'Boss1', initialSeconds: 2, sound: puftupAudio, checkedSummonsRequired: true},
-                {name: 'Kish1', initialSeconds: 2, sound: pauseDkc2Audio, checkedSummonsRequired: false},
-                {name: 'Boss2', initialSeconds: 2, sound: puftupAudio, checkedSummonsRequired: true},
+                {name: 'Boss1', initialSeconds: 30, sound: puftupAudio, checkedSummonsRequired: true},
+                {name: 'Kish1', initialSeconds: 30, sound: pauseDkc2Audio, checkedSummonsRequired: false},
+                {name: 'Boss2', initialSeconds: 25, sound: puftupAudio, checkedSummonsRequired: true},
                 {name: 'Loot', initialSeconds: 5, sound: animalTokensAudio, checkedSummonsRequired: false},
-                {name: 'Kish2', initialSeconds: 2, sound: pauseDkc2Audio, checkedSummonsRequired: false},
+                {name: 'Kish2', initialSeconds: 30, sound: pauseDkc2Audio, checkedSummonsRequired: false},
             ],
             currentTimer: undefined
         };
