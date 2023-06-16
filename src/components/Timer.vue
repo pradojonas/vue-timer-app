@@ -36,7 +36,7 @@ export default {
     },
     methods: {
         decreaseTimer() {
-            console.log("remSeconds", this.remainingSeconds);
+            //console.log("remSeconds", this.remainingSeconds);
             if (this.remainingSeconds > 0) {
                 setTimeout(() => {        
                     if (this.currentTimer.name == this.timer.name) {

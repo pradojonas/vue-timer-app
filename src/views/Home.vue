@@ -2,7 +2,12 @@
 
 <div>
     <button @click="toggleCountdown">{{ buttonLabel }}</button>
-</div>    
+</div>
+<div>
+    <br>
+    <input type="checkbox" id="checkbox" v-model="checkedSummonsEnabled" />
+    <label for="checkbox">Habilitar Boss1 e Boss2?</label>
+</div>
 <div v-if="counting">
     <Timer :timer=timers[0] :currentTimer=currentTimer @countdown="countdown"></Timer>
     <Timer :timer=timers[1] :currentTimer=currentTimer @countdown="countdown"></Timer>
@@ -34,12 +39,13 @@ export default {
         let pauseDkc2Audio = new Audio(pauseDkc2File);
         return {
             counting: false,
+            checkedSummonsEnabled: true,
             timers: [
-                {name: 'Boss1', initialSeconds: 30, sound: puftupAudio},
-                {name: 'Kish1', initialSeconds: 30, sound: pauseDkc2Audio},
-                {name: 'Boss2', initialSeconds: 25, sound: puftupAudio},
-                {name: 'Loot', initialSeconds: 5, sound: animalTokensAudio},
-                {name: 'Kish2', initialSeconds: 30, sound: pauseDkc2Audio},
+                {name: 'Boss1', initialSeconds: 2, sound: puftupAudio, checkedSummonsRequired: true},
+                {name: 'Kish1', initialSeconds: 2, sound: pauseDkc2Audio, checkedSummonsRequired: false},
+                {name: 'Boss2', initialSeconds: 2, sound: puftupAudio, checkedSummonsRequired: true},
+                {name: 'Loot', initialSeconds: 5, sound: animalTokensAudio, checkedSummonsRequired: false},
+                {name: 'Kish2', initialSeconds: 2, sound: pauseDkc2Audio, checkedSummonsRequired: false},
             ],
             currentTimer: undefined
         };
@@ -49,7 +55,9 @@ export default {
     },
     methods: {
         countdown(timer) {
-            timer.sound.play();
+            if ( this.checkedSummonsEnabled || !timer.checkedSummonsRequired) {
+                timer.sound.play();
+            }
             this.getNextTimer();
         },
         getNextTimer() {
